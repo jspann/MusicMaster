@@ -1,0 +1,12 @@
+<variable name> = <type of function> <necessary values>
+<variable name>?<boolean value>
+
+Types of variables (all objects):
+	Instrument
+		In order to play it needs
+		-
+		-Pitch
+	Note - a tone
+	Song - a series of notes
+	System - Can assign key commands to play notes or switch instruments 
+		System.assign(<key>,<notes or sound>)
