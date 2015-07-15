@@ -1,5 +1,7 @@
 <variable name> = <type of function> <necessary values>
 <variable name>?<boolean value>
+<variable name>.play
+<variable name> = load('song.m4a')
 
 Types of variables (all objects):
 	Instrument
