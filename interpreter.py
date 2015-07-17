@@ -1,6 +1,9 @@
-class interpret(object):
-	"""docstring for interpret"""
-	def __init__(self, arg):
-		super(interpret, self).__init__()
-		self.arg = arg
-		
+commands = ["stop","load"]
+class Interpreter:
+	def __init__(self,z):
+		print z
+		self.z = z
+
+	def parse(self,text):
+		print text
+		return 6
