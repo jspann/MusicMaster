@@ -5,20 +5,22 @@ import math
 import struct
 import random
 import argparse
-from itertools import *
-import interpreter
+#from itertools import *
+from Interpreter import Interpreter
 
 class WindowFrame(wx.Frame):
 	def __init__(self, parent):
 		wx.Frame.__init__(self, parent)
-
-		self.panel = wx.Panel(self)     
+		self.SetTitle('Message box')
+		self.panel = wx.Panel(self)
+		self.SetSize((3000, 200))
 		self.quote = wx.StaticText(self.panel, label="Your quote:")
 		self.result = wx.StaticText(self.panel, label="")
 		self.result.SetForegroundColour(wx.RED)
 		self.button = wx.Button(self.panel, label="Save")
 		self.lblname = wx.StaticText(self.panel, label="Your name:")
-		self.editname = wx.TextCtrl(self.panel, size=(140, -1))
+		self.editname = wx.TextCtrl(self.panel, size=(140, -1), style=wx.TE_PROCESS_ENTER)
+		#self.editname.SetFocus()
 
 		# Set sizer for the frame, so we can change frame size to match widgets
 		self.windowSizer = wx.BoxSizer()
@@ -48,11 +50,16 @@ class WindowFrame(wx.Frame):
 		self.result.SetLabel(self.editname.GetValue())
 	
 	def parseinfo(self,e):
-		#c = self.result.SetLabel(self.editname.GetValue())
-		#keycode = e.GetKeyCode()
-		#if keycode == wx.WXK_RETURN or keycode == wx.WXK_NUMPAD_ENTER or keycode == wx.WXK_TAB:
-		#	print "error"
-		print "hey"
+		keycode = e.GetKeyCode()
+		if keycode == wx.WXK_RETURN or keycode == wx.WXK_NUMPAD_ENTER or keycode == wx.WXK_TAB:
+			if self.editname.GetValue() == "exit" or self.editname.GetValue() == "exit;":
+				exit(0)
+			else:
+				z = Interpreter(self.editname.GetValue())
+				#z.interpret("meee")
+				#print interpreter.interpret()
+			e.EventObject.Navigate()
+		e.Skip()
 
 
 def main():
