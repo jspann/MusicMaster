@@ -1,3 +1,4 @@
+#this file is for the interface
 import wx
 import sys
 import wave
@@ -5,8 +6,10 @@ import math
 import struct
 import random
 import argparse
-#from itertools import *
+import thread
+import tinycss
 from Interpreter import Interpreter
+from multiprocessing import Process
 
 class WindowFrame(wx.Frame):
 	def __init__(self, parent):
@@ -14,6 +17,10 @@ class WindowFrame(wx.Frame):
 		self.SetTitle('Message box')
 		self.panel = wx.Panel(self)
 		self.SetSize((3000, 200))
+		
+		parser = tinycss.make_parser('page3')
+		stylesheet = parser.parse_stylesheet_bytes(b'''@import "foo.css"; p.error { color: red }  @lorem-ipsum; @page tables { size: landscape }''')
+		print stylesheet.rules
 		self.quote = wx.StaticText(self.panel, label="Your quote:")
 		self.result = wx.StaticText(self.panel, label="")
 		self.result.SetForegroundColour(wx.RED)
@@ -55,14 +62,18 @@ class WindowFrame(wx.Frame):
 			if self.editname.GetValue() == "exit" or self.editname.GetValue() == "exit;":
 				exit(0)
 			else:
-				z = Interpreter(self.editname.GetValue())
-				#z.interpret("meee")
-				#print interpreter.interpret()
+				z = Interpreter()
+				#thread.start_new_thread(z.parse(self.editname.GetValue()))
+				Process(target=z.parse,args=('self.editname.GetValue()',)).start()
 			e.EventObject.Navigate()
 		e.Skip()
 
-
 def main():
+	try:
+		import pyaudio
+	except Exception, e:
+		print "seems like you don't have pyaudio. Check out the instructions here: https://gist.github.com/jiaaro/9767512210a1d80a8a0d"
+		exit(0)
 	app = wx.App(False)
 	frame = WindowFrame(None)
 	frame.Show()
