@@ -2,6 +2,7 @@
 <variable name>?<boolean value>
 <variable name>.play
 <variable name> = load('song.m4a')
+Use | to separate commands
 
 Types of variables (all objects):
 	Instrument
@@ -12,3 +13,22 @@ Types of variables (all objects):
 	Song - a series of notes
 	System - Can assign key commands to play notes or switch instruments 
 		System.assign(<key>,<notes or sound>)
+
+
+
+
+
+Data Types
+	-Instrument
+		-play tone
+	-Data Stream(a song or collective of notes)
+		-load
+		-play
+		-loop (different from play)
+		-stop
+	-
+
+What we need to do
+	-load song files (m4a,wav)
+	-load instrument files (needs its own parser)
+	-Play sine wave at frequency
