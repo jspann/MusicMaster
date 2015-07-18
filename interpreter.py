@@ -20,6 +20,8 @@ class Interpreter:
 			elif text[l] == "=":
 				checkStr(mystr)
 				mystr = ""
+			elif text[l] == "\'":
+				isString = !isString
 			elif l == len(text)-1:
 				#last character
 			else:
@@ -27,8 +29,11 @@ class Interpreter:
 			print text[l]
 		player.loop("trapbeat.wav")
 		return 6
-		
+
 	def checkStr(mystring):
 		if mystring in commands:
 			pass
-		elif
+		elif mystring in variables:
+			pass
+		else:
+			variables.append(mystring)
