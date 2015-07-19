@@ -7,7 +7,8 @@ import struct
 import random
 import argparse
 import thread
-import tinycss
+import json
+
 from Interpreter import Interpreter
 from multiprocessing import Process
 
@@ -17,16 +18,19 @@ class WindowFrame(wx.Frame):
 		self.SetTitle('Message box')
 		self.panel = wx.Panel(self)
 		self.SetSize((3000, 200))
-		
-		parser = tinycss.make_parser('page3')
-		stylesheet = parser.parse_stylesheet_bytes(b'''@import "foo.css"; p.error { color: red }  @lorem-ipsum; @page tables { size: landscape }''')
-		print stylesheet.rules
+
+		#load json
+		with open('style.json') as data_file:    
+			data = json.load(data_file)
+
+
 		self.quote = wx.StaticText(self.panel, label="Your quote:")
 		self.result = wx.StaticText(self.panel, label="")
 		self.result.SetForegroundColour(wx.RED)
 		self.button = wx.Button(self.panel, label="Save")
 		self.lblname = wx.StaticText(self.panel, label="Your name:")
 		self.editname = wx.TextCtrl(self.panel, size=(140, -1), style=wx.TE_PROCESS_ENTER)
+		self.editname.SetBackgroundColour(data["commandbox-color"])
 		#self.editname.SetFocus()
 
 		# Set sizer for the frame, so we can change frame size to match widgets
