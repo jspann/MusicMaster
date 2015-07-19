@@ -21,9 +21,10 @@ class Interpreter:
 				checkStr(mystr)
 				mystr = ""
 			elif text[l] == "\'":
-				isString = !isString
+				isString = not isString
 			elif l == len(text)-1:
 				#last character
+				pass
 			else:
 				mystr = mystr + text[l]
 			print text[l]
