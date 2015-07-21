@@ -1,3 +1,5 @@
 {
-	"commandbox-color": "white"
+	"commandbox-color": "white",
+	"window-height": 320,
+	"window-width": 320
 }
